@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Liftdex - Fitness Tracker
+    </title>
+    <base href="/">
+    <meta 
+        charset="UTF-8" />
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+    <meta 
+        http-equiv="X-UA-Compatible" 
+        content="ie=edge" />
+    <meta 
+        name="theme-color" 
+        content="#D32F2F" />
+    <meta 
+        name="mobile-web-app-capable" 
+        content="yes" />
+    <meta 
+        name="apple-mobile-web-app-capable" 
+        content="yes" />
+    <link 
+        rel="manifest" 
+        href="manifest.json" />
+    <link 
+        rel="icon"  
+        type="image/png" 
+        href="assets/icon.png" />
+    <link 
+        rel="apple-touch-icon" 
+        href="assets/icon.png" />
+    <!-- <link 
+        rel="stylesheet" 
+        href="https://d11qdfnseq14hk.cloudfront.net/css/all.min.css" />
+    <link 
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" 
+        rel="stylesheet" /> -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {})
+                .catch(function(err) { 
+                    console.log('ServiceWorker registration failed: ', err) 
+                })
+        }
+    </script>
+    <script>
+        window.addEventListener('load', function(event) {
+            const s = document.createElement('script')
+            s.src = '/app/index.js'
+            document.body.appendChild(s)
+        });        
+    </script>
+</head>
+<body>
+    <!-- App will be injected here -->
+</body>
+</html>

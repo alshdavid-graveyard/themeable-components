@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Liftdex - Fitness Tracker
+    </title>
+    <base href="/">
+    <meta 
+        charset="UTF-8" />
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+    <meta 
+        http-equiv="X-UA-Compatible" 
+        content="ie=edge" />
+    <meta 
+        name="theme-color" 
+        content="#D32F2F" />
+    <meta 
+        name="mobile-web-app-capable" 
+        content="yes" />
+    <meta 
+        name="apple-mobile-web-app-capable" 
+        content="yes" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            var s = document.createElement('script')
+            s.src = '/app/index.js'
+            document.body.appendChild(s)
+        })
+    </script>
+    <link 
+      rel="manifest" 
+      href="manifest.json" />
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {})
+                .catch(function(err) { 
+                    console.log('ServiceWorker registration failed: ', err) 
+                })
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            var l = document.createElement('link')
+            l.rel='stylesheet'
+            l.href = 'https://d11qdfnseq14hk.cloudfront.net/css/all.min.css'
+            document.body.appendChild(l)
+        })
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(event) {
+          var l = document.createElement('link')
+          l.rel='stylesheet'
+          l.href = 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap'
+          document.body.appendChild(l)
+      })
+    </script>
+    <link 
+        rel="icon"  
+        type="image/png" 
+        href="assets/icon.png" />
+    <link 
+        rel="apple-touch-icon" 
+        href="assets/icon.png" />
+</head>
+<body>
+    <!-- App will be injected here -->
+    <div 
+      id="faccade"
+      style="
+        background-color: #F44336;
+        height: 78px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;">
+    </div>
+</body>
+</html>
