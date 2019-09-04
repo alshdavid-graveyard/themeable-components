@@ -1,9 +1,9 @@
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
-import { ConfigurableStore } from '~/platform/theme' 
+import { ConfigurablesService } from '~/platform/theme' 
 
 interface State {
-  configurableStore: ConfigurableStore
+  configurablesService: ConfigurablesService
 }
 
 export const AppContext = createContext<State>(null as any)

@@ -25,8 +25,8 @@ export const Button = ({
   className = '',
   ...buttonProps
 }: ButtonProps) => {
-  const { configurableStore } = useAppContext()
-  const configurables = useSubscribe(configurableStore)
+  const { configurablesService } = useAppContext()
+  const configurables = useSubscribe(configurablesService)
   const isMobile = useMediaQuery(Breakpoint.L)
 
   // Pick out keys we care about, setting defaults as we need

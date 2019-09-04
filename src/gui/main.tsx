@@ -1,23 +1,25 @@
 import { h, render } from 'preact'
 import { AppContext } from '~/gui/context'
-import { ConfigurableStore } from '~/platform/theme'
+import { Reskuxx } from '~/kit/reskuxx'
+import { ConfigurablesService } from '~/platform/theme'
 import { Button } from './components'
 import * as fromButton from './components/button/button'
 
 void async function main() {
   // Creating store 
-  const configurableStore = new ConfigurableStore()
+  const store = new Reskuxx()
+  const configurablesService = new ConfigurablesService(store)
 
   // Debugging: logging updates to store in browser 
   // console
-  configurableStore.subscribe(console.warn)
+  configurablesService.subscribe(console.warn)
 
   // Debugging: exposing store to window object
   // for direct access from browser console
-  ;(window as any).roktTheme = configurableStore
+  ;(window as any).roktTheme = configurablesService
 
   // Inserting some configurables for demo purposes
-  configurableStore.putConfigurables({ 
+  await configurablesService.putConfigurables({ 
     [fromButton.ButtonConfigurables.DefaultColor]: '#fff',
     [fromButton.ButtonConfigurables.DesktopBackgroundColor]: '#1976D2',
     [fromButton.ButtonConfigurables.MobileBackgroundColor]: '#212121',
@@ -27,7 +29,7 @@ void async function main() {
   // reactivity as would be the case in transactions pushing changes 
   // to the widget during the design phase
   setTimeout(() => 
-    configurableStore.putConfigurables({ 
+    configurablesService.putConfigurables({ 
       [fromButton.ButtonConfigurables.DefaultColor]: '#BBDEFB' 
     }), 
     5000
@@ -45,7 +47,7 @@ void async function main() {
   // reference into the context
   render(
     <AppContext.Provider value={{
-      configurableStore,
+      configurablesService,
     }}>
       <App/>
     </AppContext.Provider>, 
