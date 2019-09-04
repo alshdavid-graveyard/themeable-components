@@ -1,9 +1,22 @@
 import { useState, useEffect } from "preact/hooks";
 
+export const size = {
+  S: '200px',
+  M: '600px',
+  L: '1024px',
+}
+
 export const Breakpoint = {
-  S: '(min-width: 200px)',
-  M: '(min-width: 200px)',
-  L: '(min-width: 600px)',
+  MaxWidth: {
+    S: `(max-width: ${size.S})`,
+    M: `(max-width: ${size.M})`,
+    L: `(max-width: ${size.L})`,
+  },
+  MinWidth: {
+    S: `(min-width: ${size.S})`,
+    M: `(min-width: ${size.M})`,
+    L: `(min-width: ${size.L})`,
+  }
 }
 
 export const useMediaQuery = (query: string) => {

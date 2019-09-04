@@ -1,28 +1,30 @@
 import { h, render } from 'preact'
+import { map } from 'rxjs/operators'
 import { AppContext } from '~/gui/context'
-import { Reskuxx } from '~/kit/reskuxx'
+import { MemoryStore } from '~/kit/memory-store'
 import { ConfigurablesService } from '~/platform/theme'
-import { Button } from './components'
-import * as fromButton from './components/button/button'
+import { Button, ButtonConfigurables } from './components'
 
 void async function main() {
   // Creating store 
-  const store = new Reskuxx()
+  const store = new MemoryStore({ debug: true })
   const configurablesService = new ConfigurablesService(store)
 
   // Debugging: logging updates to store in browser 
   // console
-  configurablesService.subscribe(console.warn)
+  configurablesService
+    .pipe(map(state => JSON.stringify(state, null, 4)))
+    .subscribe(console.log)
 
   // Debugging: exposing store to window object
   // for direct access from browser console
   ;(window as any).roktTheme = configurablesService
 
   // Inserting some configurables for demo purposes
-  await configurablesService.putConfigurables({ 
-    [fromButton.ButtonConfigurables.DefaultColor]: '#fff',
-    [fromButton.ButtonConfigurables.DesktopBackgroundColor]: '#1976D2',
-    [fromButton.ButtonConfigurables.MobileBackgroundColor]: '#212121',
+  configurablesService.putConfigurables({ 
+    [ButtonConfigurables.DefaultColor]: '#fff',
+    [ButtonConfigurables.DesktopBackgroundColor]: '#1976D2',
+    [ButtonConfigurables.MobileBackgroundColor]: '#212121',
   })
 
   // Adding/overriding an extra key after some time to demonstrate 
@@ -30,9 +32,9 @@ void async function main() {
   // to the widget during the design phase
   setTimeout(() => 
     configurablesService.putConfigurables({ 
-      [fromButton.ButtonConfigurables.DefaultColor]: '#BBDEFB' 
+      [ButtonConfigurables.DefaultColor]: '#BBDEFB' 
     }), 
-    5000
+    2000
   )
 
   // App has a single button on it, the button has the theme 
@@ -47,6 +49,7 @@ void async function main() {
   // reference into the context
   render(
     <AppContext.Provider value={{
+      store,
       configurablesService,
     }}>
       <App/>

@@ -2,7 +2,7 @@ import './button.scss'
 import { h } from 'preact';
 import { useMediaQuery, Breakpoint } from '~/kit/use-media-query';
 import { useSubscribe } from '~/kit/use-subscribe'
-import { useAppContext } from '~/gui/context';
+import { useServices } from '~/gui/context';
 import * as CSS from 'csstype'
 
 // Button describes what configurable keys it wants in a 
@@ -20,14 +20,16 @@ interface ButtonProps extends HTMLButtonProps {
   style?: CSS.Properties
 }
 
+// Button essentially extends the standard html button API
+// but also supplies default theming on top of that
 export const Button = ({
   style = {},
   className = '',
   ...buttonProps
 }: ButtonProps) => {
-  const { configurablesService } = useAppContext()
+  const { configurablesService } = useServices()
   const configurables = useSubscribe(configurablesService)
-  const isMobile = useMediaQuery(Breakpoint.L)
+  const isMobile = useMediaQuery(Breakpoint.MaxWidth.M)
 
   // Pick out keys we care about, setting defaults as we need
   const color = configurables[ButtonConfigurables.DefaultColor] || 'white'

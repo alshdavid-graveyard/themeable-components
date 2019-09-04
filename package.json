@@ -15,6 +15,8 @@
     "start": "run-p build:watch serve"
   },
   "dependencies": {
+    "@types/lodash-es": "^4.17.3",
+    "lodash-es": "^4.17.15",
     "preact": "^10.0.0-rc.1",
     "redux": "^4.0.4",
     "rxjs": "^6.4.0"
