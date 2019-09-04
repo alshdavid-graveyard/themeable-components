@@ -42,11 +42,7 @@ export class MemoryStore {
   public query(fn: (state: any) => any, action: string = 'QUERY_EXEC') {
     const getState = () => cloneDeep(this.store.getValue())
     const update = fn(getState())
-    // if (isEqual(this.store.getValue(), update)) {
-    //   this.debugLog('NO_CHANGE_IGNORED')
-    //   return
-    // }
-    this.store.next(cloneDeep({ ...this.value, ...update}))
+    this.store.next(cloneDeep({ ...this.value, ...update }))
     this.debugLog(action)
   }
 
