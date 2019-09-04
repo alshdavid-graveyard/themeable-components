@@ -6,7 +6,7 @@ export interface State {
   [collectionName]: Configurables
 }
 
-export const init = (state: State) => ({
+export const init = () => ({
   [collectionName]: {}
 })
 
@@ -17,7 +17,7 @@ export const put = (configurables: Configurables) => (state: State) => ({
   },
 })
 
-export const Queries = {
+export const Query = {
   init,
   put,
 }

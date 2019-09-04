@@ -18,7 +18,7 @@ void async function main() {
 
   // Debugging: exposing store to window object
   // for direct access from browser console
-  ;(window as any).roktTheme = configurablesService
+  ;(window as any).configurablesService = configurablesService
 
   // Inserting some configurables for demo purposes
   configurablesService.putConfigurables({ 

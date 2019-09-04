@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Configurables } from './configurables'
-import { Queries, Labels, collectionName } from './queries'
+import { Query, Labels, collectionName } from './queries'
 import { MemoryStore } from '~/kit/memory-store';
 
 export class ConfigurablesService {
@@ -25,7 +25,7 @@ export class ConfigurablesService {
     // Setting up piece of state
     this.store
       .withLabel(Labels.init)
-      .query(Queries.init)
+      .query(Query.init)
     
     // This is essentially a selector
     this.configurables = this.store
@@ -35,6 +35,6 @@ export class ConfigurablesService {
   public putConfigurables(configurables: Configurables) {
     this.store
       .withLabel(Labels.put)
-      .query(Queries.put({ ...configurables }))
+      .query(Query.put(configurables))
   }
 }
