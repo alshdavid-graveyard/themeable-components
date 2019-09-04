@@ -1,0 +1,23 @@
+.component-button {
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 30px;
+  font-size: 30px;
+  transition: .25s opacity;
+  font-weight: 300;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transition: 0s opacity;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
+}
