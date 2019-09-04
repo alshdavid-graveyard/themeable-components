@@ -1,24 +1,22 @@
 import { BehaviorSubject } from 'rxjs'
 import { Configurables } from './configurables'
  
-type ThemeKeys = Record<string, string>
-
 export class ConfigurableStore {
-  configurables = new BehaviorSubject<Configurables>({})
+  configurableState = new BehaviorSubject<Configurables>({})
 
-  get value() {
-    return this.configurables.value
+  get configurables() {
+    return this.configurableState.value
   }
 
   get subscribe() {
-    return this.configurables.subscribe.bind(this.configurables)
+    return this.configurableState.subscribe.bind(this.configurableState)
   }
 
-  putConfigurables(themeKey: ThemeKeys) {
+  putConfigurables(configurables: Configurables) {
     const update = { 
-      ...this.value, 
-      ...themeKey 
+      ...this.configurables,
+      ...configurables 
     }
-    this.configurables.next(update)
+    this.configurableState.next(update)
   }
 }
