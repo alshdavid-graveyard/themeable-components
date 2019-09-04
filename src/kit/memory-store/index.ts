@@ -1,6 +1,5 @@
-import cloneDeep from 'lodash-es/cloneDeep'
-import isEqual from 'lodash-es/isEqual'
 import { BehaviorSubject } from 'rxjs'
+const cloneDeep = <T>(target: T): T => JSON.parse(JSON.stringify(target))
 
 interface DevTools {
   send(action: string, state: any): void
@@ -43,10 +42,10 @@ export class MemoryStore {
   public query(fn: (state: any) => any, action: string = 'QUERY_EXEC') {
     const getState = () => cloneDeep(this.store.getValue())
     const update = fn(getState())
-    if (isEqual(this.store.getValue(), update)) {
-      this.debugLog('NO_CHANGE_IGNORED')
-      return
-    }
+    // if (isEqual(this.store.getValue(), update)) {
+    //   this.debugLog('NO_CHANGE_IGNORED')
+    //   return
+    // }
     this.store.next(cloneDeep({ ...this.value, ...update}))
     this.debugLog(action)
   }
