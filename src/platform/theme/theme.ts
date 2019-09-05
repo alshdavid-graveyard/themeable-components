@@ -1,40 +1,32 @@
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
 import { Configurables } from './configurables'
-import { Query, Labels, collectionName } from './queries'
-import { MemoryStore } from '~/kit/memory-store';
+import { Query, Labels, collectionName, ConfigurablesCollection } from './queries'
+import { State } from '~/kit/memory-store';
 
 export class ConfigurablesService {
-  private configurables: Observable<Configurables>
+  private collection: State.Collection<ConfigurablesCollection>
 
   public get subscribe() {
-    return this.configurables.subscribe.bind(this.configurables)
+    return this.collection.subscribe.bind(this.collection)
   }
 
   public get pipe() {
-    return this.configurables.pipe.bind(this.configurables)
+    return this.collection.pipe.bind(this.collection)
   }
 
   public get value() {
-    return this.store.value[collectionName]
+    return this.collection.value
   }
 
   constructor(
-    private store: MemoryStore
+    private store: State.Engine
   ) {
-    // Setting up piece of state
-    this.store
-      .withLabel(Labels.init)
-      .query(Query.init)
-    
-    // This is essentially a selector
-    this.configurables = this.store
-      .pipe(map(state => state[collectionName]))
+    this.collection = new State.Collection(this.store, collectionName)
+    this.collection.query(Query.init)
   }
 
   public putConfigurables(configurables: Configurables) {
-    this.store
-      .withLabel(Labels.put)
+    this.collection
+      .as(Labels.put)
       .query(Query.put(configurables))
   }
 }

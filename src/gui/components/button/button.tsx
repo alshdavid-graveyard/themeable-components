@@ -28,16 +28,16 @@ export const Button = ({
   ...buttonProps
 }: ButtonProps) => {
   const { configurablesService } = useServices()
-  const configurables = useSubscribe(configurablesService)
+  const { items } = useSubscribe(configurablesService)
   const isMobile = useMediaQuery(Breakpoint.MaxWidth.M)
 
   // Pick out keys we care about, setting defaults as we need
-  const color = configurables[ButtonConfigurables.DefaultColor] || 'white'
+  const color = items[ButtonConfigurables.DefaultColor] || 'white'
   
   // Deal with response styles
   const backgroundColor = isMobile
-    ? configurables[ButtonConfigurables.MobileBackgroundColor] || 'black'
-    : configurables[ButtonConfigurables.DesktopBackgroundColor] || 'black'
+    ? items[ButtonConfigurables.MobileBackgroundColor] || 'black'
+    : items[ButtonConfigurables.DesktopBackgroundColor] || 'black'
   
   // Create a style object
   const buttonStyles = {

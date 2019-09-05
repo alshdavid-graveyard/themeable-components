@@ -2,19 +2,19 @@ import { Configurables } from "./configurables";
 
 export const collectionName = 'Configurables'
 
-export interface State {
-  [collectionName]: Configurables
+export interface ConfigurablesCollection {
+  items: Configurables
 }
 
 export const init = () => ({
-  [collectionName]: {}
+  items: {}
 })
 
-export const put = (configurables: Configurables) => (state: State) => ({
-  [collectionName]: {
-    ...state[collectionName],
+export const put = (configurables: Configurables) => (state: ConfigurablesCollection) => ({
+  items: {
+    ...state.items,
     ...configurables,
-  },
+  }
 })
 
 export const Query = {

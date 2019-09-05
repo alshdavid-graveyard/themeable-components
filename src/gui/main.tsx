@@ -1,13 +1,13 @@
 import { h, render } from 'preact'
 import { map } from 'rxjs/operators'
 import { AppContext } from '~/gui/context'
-import { MemoryStore } from '~/kit/memory-store'
+import { State } from '~/kit/memory-store'
 import { ConfigurablesService } from '~/platform/theme'
 import { Button, ButtonConfigurables } from './components'
 
 void async function main() {
   // Creating store 
-  const store = new MemoryStore({ debug: true })
+  const store = State.Create({ useReduxTools: true })
   const configurablesService = new ConfigurablesService(store)
 
   // Debugging: logging updates to store in browser 
@@ -49,7 +49,6 @@ void async function main() {
   // reference into the context
   render(
     <AppContext.Provider value={{
-      store,
       configurablesService,
     }}>
       <App/>
